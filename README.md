@@ -9,6 +9,7 @@ For mac users, if you encounter problems in running RGtk2, I found the following
 https://gist.github.com/sebkopf/9405675
 
 My R keeps crashing when calling RGtk2 after upgrade my mac OS X to Yosemite. It was fixed after following the these steps:
+'''
 Reinstall XQuartz
 (Re)install Macports and XCode
 In terminal, run:
@@ -20,3 +21,4 @@ In R,
 install.packages("RGtk2")
 or (if binary version of RGtk2 is not available for your R version)
 install.packages("RGtk2", type="source")
+'''
