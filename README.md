@@ -8,7 +8,7 @@ OEFinder requires R version >= 3.1.3
 For mac users, if you encounter problems in running RGtk2, I found the following link to be useful:
 https://gist.github.com/sebkopf/9405675
 
-My R kept crashing when calling RGtk2 after upgrading my mac OS X to Yosemite. It was fixed after following the these steps:
+My R kept crashing when calling RGtk2 after upgrading my mac OS X to Yosemite. It was fixed by following the these steps:
 ```
 Reinstall XQuartz
 (Re)install Macports and XCode
