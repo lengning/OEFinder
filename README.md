@@ -4,12 +4,14 @@ OEFinder has two Graphical user interface (GUI) impelmentations, using R/shiny p
 
 To run OEFinder shiny implementation, open R and type:
 ```
+install.packages('shiny')
 library(shiny)
 runGitHub("OEFinder","lengning")
 ```
 
 Or download the zip file, open R and type:
 ```
+install.packages('shiny')
 library(shiny)
 runApp("YOUR_PATH/OEFindershiny_0.0.1")
 ```
