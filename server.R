@@ -43,7 +43,7 @@ function (Data, Group = NULL, Poly = 2, Nchunk = 8, Sigcut = 0.01, MeanLOD=1,
     colnames(Aggr) <- c("p2nd","coef2nd","coef1","r2","adjr2", "beta",
 	"onesidep","ssall","ssr","ssreg","F","fpval","aggrstat")
 
-
+		#browser()
     ## Permute data
     if(numNullgenes/numPermu > nrow(Data)) numPermu <- ceiling(numNullgenes/nrow(Data))
     set.seed(Seed)
@@ -172,7 +172,7 @@ shinyServer(function(input, output) {
 		Num=input$GroupNum, 
 		NormTF=ifelse(input$Norm_buttons=="1",TRUE,FALSE),
 		RMTF=ifelse(input$RM_buttons=="1",TRUE,FALSE), 
-		FDR=ifelse(input$TgtFDR=="1",TRUE,FALSE), 
+		FDR=input$TgtFDR, 
 		LODNum=input$LOD, NumPermu=input$PermIn,
 		Dir=outdir, 
 		exExpF = paste0(outdir,input$exNormFileName,".csv"),
