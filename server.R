@@ -1,30 +1,6 @@
 library(shiny)
 library(gdata)
 
-PolyEach <- function(X, V, Poly){
-        Po <- poly(V, Poly)
-        aa <- lm(X ~ Po)
-        bb <- summary(aa)
-        coe <- coefficients(bb)
-        # one side p
-        onesd <- pt(coe[3,3],aa$df.residual,lower.tail=FALSE)
-        # SS
-        ssall <- sum((X-mean(X))^2)
-        ssr <- sum(aa$residuals^2)
-        ssreg <- ssall-ssr
-        fstat <- bb$fstatistic
-        fp <- pf(fstat[1],fstat[2],fstat[3],lower.tail=FALSE)
-        out <- c(coe[3, 4],coe[3,1], coe[2,1],
-                bb$r.squared, bb$adj.r.squared,
-                coe[3,3],onesd, ssall, ssr, ssreg,
-                bb$fstatistic[1],fp, -log(onesd)-log(fp))
-        names(out) <- c("p2nd","coef2nd","coef1","r2","adjr2", "beta",
-  "onesidep","ssall","ssr","ssreg","F","fpval","aggrstat")
-  out
-}
-
-
-
 FindOEfun<-
 function (Data, Group = NULL, Poly = 2, Nchunk = 8, Sigcut = 0.01, MeanLOD=1,
     Plot = FALSE, NumPlot = NULL, numNullgenes=10000, numPermu=10,
@@ -67,8 +43,9 @@ function (Data, Group = NULL, Poly = 2, Nchunk = 8, Sigcut = 0.01, MeanLOD=1,
     colnames(Aggr) <- c("p2nd","coef2nd","coef1","r2","adjr2", "beta",
 	"onesidep","ssall","ssr","ssreg","F","fpval","aggrstat")
 
+		browser()
     ## Permute data
-    if(numNullgenes/numPermu > nrow(Data)) numPermu <- ceiling(numNullgenes/numPermu)
+    if(numNullgenes/numPermu > nrow(Data)) numPermu <- ceiling(numNullgenes/nrow(Data))
     set.seed(Seed)
     PermList <- sapply(1:numPermu,function(i)Datasort[,sample(1:Ncol,Ncol)],simplify=F)
     PermuMatAll <- do.call(rbind, PermList)
@@ -128,9 +105,10 @@ function (Data, Group = NULL, Poly = 2, Nchunk = 8, Sigcut = 0.01, MeanLOD=1,
 }
 
 
+
 PolyEach <- function(X, V, Poly){
         Po <- poly(V, Poly)
-	aa <- lm(X ~ Po)
+        aa <- lm(X ~ Po)
         bb <- summary(aa)
         coe <- coefficients(bb)
         # one side p
@@ -146,9 +124,10 @@ PolyEach <- function(X, V, Poly){
                 coe[3,3],onesd, ssall, ssr, ssreg,
                 bb$fstatistic[1],fp, -log(onesd)-log(fp))
         names(out) <- c("p2nd","coef2nd","coef1","r2","adjr2", "beta",
-	"onesidep","ssall","ssr","ssreg","F","fpval","aggrstat")
-	out
-} 
+  "onesidep","ssall","ssr","ssreg","F","fpval","aggrstat")
+  out
+}
+
 
 
 
