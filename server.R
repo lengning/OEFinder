@@ -199,7 +199,7 @@ shinyServer(function(input, output) {
 					Sigcut = List$FDR, MeanLOD = List$LODNum,
           Plot = List$PlotTF, NumPlot = PN, 
 					numNullgenes = List$NumPermu,
-          numPermu = ceiling(List$NumPermu/(nrow(DataUse)*5)),
+          numPermu = ceiling(List$NumPermu/(nrow(DataUse))*5),
           Seed=1, mfrow=c(5,4))
   	if(List$PlotTF)dev.off()
 
