@@ -43,7 +43,7 @@ function (Data, Group = NULL, Poly = 2, Nchunk = 8, Sigcut = 0.01, MeanLOD=1,
     colnames(Aggr) <- c("p2nd","coef2nd","coef1","r2","adjr2", "beta",
 	"onesidep","ssall","ssr","ssreg","F","fpval","aggrstat")
 
-		browser()
+
     ## Permute data
     if(numNullgenes/numPermu > nrow(Data)) numPermu <- ceiling(numNullgenes/nrow(Data))
     set.seed(Seed)
