@@ -1,4 +1,5 @@
 library(shiny)
+library(shinyFiles)
 library(gdata)
 
 FindOEfun<-
@@ -134,11 +135,18 @@ PolyEach <- function(X, V, Poly){
 
 
 # Define server logic for slider examples
-shinyServer(function(input, output) {
-
+shinyServer(function(input, output, session) {
+	  volumes <- c('home'="~")
+    shinyDirChoose(input, 'Outdir', roots=volumes, session=session, restrictions=system.file(package='base'))
+    output$Dir <- renderPrint({parseDirPath(volumes, input$Outdir)})	
 		# Group V
 		In <- reactive({
 		the.file <- input$filename$name
+
+    print(input$Outdir)
+    outdir <- paste0("~/",input$Outdir[[1]][[2]],"/")
+    message("output folder")
+    print(outdir)
 	
 		Sep=strsplit(the.file,split="\\.")[[1]]
   	if(Sep[length(Sep)]%in%c("xls"))a1=read.xls(input$filename$datapath,stringsAsFactors=F,header=TRUE, row.names=1)
@@ -161,8 +169,6 @@ shinyServer(function(input, output) {
     GroupVIn=read.table(input$GroupVector$datapath,stringsAsFactors=F,header=F, sep="\t")
     GroupV=GroupVIn[[1]]
     }
-		if(input$Outdir=="")outdir <- "~/"
-		else outdir <- input$Outdir
     # Compose data frame
 		#input$filename$name
 		List <- list(

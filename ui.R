@@ -1,4 +1,5 @@
 library(shiny)
+library(shinyFiles)
 library(gdata)
 options(shiny.maxRequestSize=500*1024^2) 
 # Define UI for slider demo application
@@ -54,11 +55,8 @@ shinyUI(pageWithSidebar(
 						        value = 10000)),
 		column(3,
 		# output dir
-		textInput("Outdir", label = "Output directory (default is the home directory)",
-		        value = "~/"),
-		#shinyDirButton('folder', 'Folder select', 'Please select a folder', FALSE),
-		#verbatimTextOutput('filepaths')),
-		
+	  shinyDirButton('Outdir', 'Output folder select', 'Please select a folder'),
+
 	# export normalzied matrix
 	textInput("exNormFileName", 
 	label = "Export file name - expression matrix", 
