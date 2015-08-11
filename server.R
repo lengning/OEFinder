@@ -89,10 +89,10 @@ function (Data, Group = NULL, Poly = 2, Nchunk = 8, Sigcut = 0.01, MeanLOD=1,
 
 	if(Plot==TRUE){
                 if(is.null(NumPlot))NumPlot=length(Sig)
-								if(NumPlot>0){
+		if(NumPlot>0){
                 par(mfrow=mfrow)
                 for(i in 1:NumPlot){
-								tmpname=names(Allpsort)[i]	
+		tmpname=names(Allpsort)[i]	
                 plot(1:Ncol,
                       DataIn[tmpname, order(Group)],
                        main=paste0(
@@ -136,30 +136,30 @@ PolyEach <- function(X, V, Poly){
 
 # Define server logic for slider examples
 shinyServer(function(input, output, session) {
-	  volumes <- c('home'="~")
+    volumes <- c('home'="~")
     shinyDirChoose(input, 'Outdir', roots=volumes, session=session, restrictions=system.file(package='base'))
     output$Dir <- renderPrint({parseDirPath(volumes, input$Outdir)})	
-		# Group V
-		In <- reactive({
-		the.file <- input$filename$name
+	# Group V
+	In <- reactive({
+	the.file <- input$filename$name
 
     print(input$Outdir)
     outdir <- paste0("~/",input$Outdir[[1]][[2]],"/")
     message("output folder")
     print(outdir)
 	
-		Sep=strsplit(the.file,split="\\.")[[1]]
+	Sep=strsplit(the.file,split="\\.")[[1]]
   	if(Sep[length(Sep)]%in%c("xls"))a1=read.xls(input$filename$datapath,stringsAsFactors=F,header=TRUE, row.names=1)
   	if(Sep[length(Sep)]=="csv")a1=read.csv(input$filename$datapath,stringsAsFactors=F,header=TRUE, row.names=1)
   	if(Sep[length(Sep)]%in%c("txt","tab"))a1=read.table(input$filename$datapath,stringsAsFactors=F,header=TRUE, row.names=1)
   	Data=data.matrix(a1)
 
-		Group.file <- input$GroupVector$name
+	Group.file <- input$GroupVector$name
   	GroupB <- ifelse(is.null(Group.file),FALSE,TRUE)
   	#GroupB=FALSE
-		GroupV <- NULL
+	GroupV <- NULL
   	
-		if(GroupB==TRUE){
+	if(GroupB==TRUE){
     Group.Sep=strsplit(Group.file,split="\\.")[[1]]
     if(Group.Sep[length(Group.Sep)]%in%c("xls"))
     GroupVIn=read.xls(input$GroupVector$datapath,stringsAsFactors=F,header=F)
@@ -209,8 +209,8 @@ shinyServer(function(input, output, session) {
           Seed=1, mfrow=c(5,4))
   	if(List$PlotTF)dev.off()
 
-		# write out
-		 Sig=matrix(Res$Sig,ncol=1)
+	# write out
+	Sig=matrix(Res$Sig,ncol=1)
      rownames(Sig)=names(Res$Sig)
      colnames(Sig)="p-value"
 
@@ -219,22 +219,22 @@ shinyServer(function(input, output, session) {
      colnames(Allp)="p-value"
      write.csv(Sig,file=List$exOEF)
  
- 	 	#cat(paste0("\n\nNum OE genes: ", length(Res$Sig)))
-		 write.csv(Allp,file=List$exPVF)
+ 	#cat(paste0("\n\nNum OE genes: ", length(Res$Sig)))
+	 write.csv(Allp,file=List$exPVF)
   	 if(List$RMTF)write.csv(Res$CleanedData, file=List$exExpF)
   	 else write.csv(Res$AdjustedData, file=List$exExpF)
 
-	 	List=c(List, list(Sig=Sig, DataSig=DataUse[rownames(Sig),]))	
+	List=c(List, list(Sig=Sig, DataSig=DataUse[rownames(Sig),]))	
 }) 
 
   Act <- eventReactive(input$Submit,{
 		      In()})
 	# Show the values using an HTML table
   output$print0 <- renderText({
-				tmp <- Act()
-				str(tmp)
-				paste("output directory:", tmp$Dir,
-				"; # OE genes:", length(tmp$Sig))
+		tmp <- Act()
+		str(tmp)
+		paste("output directory:", tmp$Dir,
+		"; # OE genes:", length(tmp$Sig))
   })
 
 	output$tab <- renderDataTable({
