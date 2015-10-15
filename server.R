@@ -12,7 +12,7 @@ function (Data, Group = NULL, Poly = 2, Nchunk = 8, Sigcut = 0.01, MeanLOD=1,
     # rescale here
     DataIn <- Data
 	if(min(DataIn)<0)stop("Error: exist values < 0!")
-    DataIn1 <- DataIn[which(rowMeans(DataIn)> MeanLOD),]
+    DataIn1 <- DataIn[which(rowMeans(DataIn)> MeanLOD & apply(DataIn1,1,sd)>0),]
     cat(paste("\n Removed genes with mean smaller or equal to", MeanLOD, "\n"))
     DataMean <- apply(DataIn1,1,mean)
     DataSD <- apply(DataIn1,1,sd)
