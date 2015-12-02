@@ -31,14 +31,14 @@ shinyUI(pageWithSidebar(
 						        value = 0.01),
 
 		# Normalization
-		checkboxGroupInput("Norm_buttons",
+		radioButtons("Norm_buttons",
 		    label = "Normalization needed?",
 				 choices = list("Yes" = 1,
 								   "No" = 2),
 						         selected = 1)),								
 		column(3,
 		# Remove or impute
-			checkboxGroupInput("RM_buttons",
+		radioButtons("RM_buttons",
 		    label = "Remove OE genes or impute?",
 				 choices = list("Remove" = 1,
 								   "Impute" = 2),
@@ -73,7 +73,7 @@ shinyUI(pageWithSidebar(
 
 	column(3,
 		# Remove or impute
-			checkboxGroupInput("Plot_buttons",
+		radioButtons("Plot_buttons",
 		    label = "Plot OE genes?",
 				 choices = list("Yes" = 1,
 								   "No" = 2),
