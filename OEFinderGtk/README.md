@@ -1,5 +1,5 @@
-# OEFinder
-OEFinder requires R version >= 3.1.3
+# OEFinder Gtk+ implementation
+OEFinder Gtk+ implementation requires R version >= 3.1.3
 
 
 
