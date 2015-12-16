@@ -21,3 +21,6 @@ Or download the zip file, open R and type:
 runApp("YOUR_PATH/OEFindershiny_0.0.1")
 ```
 YOUR_PATH is the directory that contains the unzipped OEFindershiny_0.0.1 folder.
+
+
+![Screenshot](https://github.com/lengning/OEFinder/blob/master/figs/OEFinder_screenshot.png)
