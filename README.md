@@ -18,9 +18,9 @@ runGitHub("OEFinder","lengning")
 
 Or download the zip file, open R and type:
 ```
-runApp("YOUR_PATH/OEFindershiny_0.0.1")
+runApp("YOUR_PATH/OEFinder_Shiny")
 ```
-YOUR_PATH is the directory that contains the unzipped OEFindershiny_0.0.1 folder.
+YOUR_PATH is the directory that contains the unzipped OEFindershiny_0.0.2 folder.
 
 
 ![Screenshot](https://github.com/lengning/OEFinder/blob/master/figs/OEFinder_screenshot.png)
