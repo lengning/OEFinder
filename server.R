@@ -83,7 +83,7 @@ function (Data, Group = NULL, Poly = 2, Nchunk = 8, Sigcut = 0.01, MeanLOD=1,
 
 	# original scale
 	DataadjTran <- Dataadj*DataSD + DataMean
-	DataadjTran[names(Sig),] <-  outer(Ncol,DataMean[names(Sig)]) 
+	DataadjTran[names(Sig),] <-   outer(DataMean[names(Sig)], rep(1,Ncol))
 	DatarmTran <- Datarm * DataSD[setdiff(rownames(Datasort),names(Sig))] + DataMean[setdiff(rownames(Datasort),names(Sig))]
         
 
@@ -192,7 +192,12 @@ shinyServer(function(input, output, session) {
 		DataUse0=Data
   	if(List$NormTF){
     	library(EBSeq)
-    	DataUse0=GetNormalizedMat(Data,MedianNorm(DataUse0))
+			Sizes <- MedianNorm(DataUse0)
+			if(is.na(Sizes1)){
+			Sizes <- MedianNorm(DataUse0, alternative=T)
+			print("alternative normalization is applied - all genes have at least one zeros")
+			}
+    	DataUse0=GetNormalizedMat(Data,Sizes)
  	 	}
   	DataUse=DataUse0[which(rowMeans(DataUse0)>List$LODNum),]
 		# main function
