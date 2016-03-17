@@ -193,7 +193,7 @@ shinyServer(function(input, output, session) {
   	if(List$NormTF){
     	library(EBSeq)
 			Sizes <- MedianNorm(DataUse0)
-			if(is.na(Sizes1)){
+			if(is.na(Sizes)){
 			Sizes <- MedianNorm(DataUse0, alternative=T)
 			print("alternative normalization is applied - all genes have at least one zeros")
 			}
